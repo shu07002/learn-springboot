@@ -5,6 +5,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 /*
 * 데이터베이스 테이블과 직접 매핑되는 핵심 객체들
@@ -13,6 +18,7 @@ import lombok.NoArgsConstructor;
 * 실제 데이터 원본 그 자체다
 */
 
+@EntityListeners(AuditingEntityListener.class)
 @Entity // 엔티티로 지정
 @Getter // 클래스의 모든 필드에 대한 접근자 메소드를 만듦
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // Args 없는 생성자 = 기본 생성자 / 타입은 protected로
@@ -28,6 +34,14 @@ public class Article {
 
     @Column(name = "content", nullable = false)
     private String content;
+
+    @CreatedDate
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @Builder // 빌더 패턴으로 객체 생성
     public Article(String title, String content) {
