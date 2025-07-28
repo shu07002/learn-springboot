@@ -1,8 +1,11 @@
 package me.kkw.springboot_developer.config;
 
 import lombok.RequiredArgsConstructor;
+import me.kkw.springboot_developer.config.jwt.JwtProperties;
+import me.kkw.springboot_developer.config.jwt.TokenProvider;
 import me.kkw.springboot_developer.service.UserDetailService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,11 +18,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity // 웹 보안 기능 활성화 의미, 이걸 켜야 스프링 시큐리티가 동작
+@EnableWebSecurity
 @RequiredArgsConstructor
+@EnableConfigurationProperties(JwtProperties.class)
 public class WebSecurityConfig {
 
     private final UserDetailService userService;
+
+    @Bean
+    public TokenProvider tokenProvider(JwtProperties jwtProperties) {
+        return new TokenProvider(jwtProperties);
+    }
 
     // 스프링 시큐리티의 기능 비활성화 영역
     /*

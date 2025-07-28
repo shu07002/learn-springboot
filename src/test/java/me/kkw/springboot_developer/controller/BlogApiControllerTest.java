@@ -1,4 +1,4 @@
-package me.kkw.springboot_developer;
+package me.kkw.springboot_developer.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.kkw.springboot_developer.domain.Article;
