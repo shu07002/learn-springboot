@@ -9,6 +9,7 @@ import me.kkw.springboot_developer.domain.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -22,6 +23,7 @@ import java.util.Set;
 * JWT token을 만들고, 받은 JWT가 찐인지 짭인지 구별한다.
 */
 
+@Component
 @RequiredArgsConstructor
 public class TokenProvider {
 

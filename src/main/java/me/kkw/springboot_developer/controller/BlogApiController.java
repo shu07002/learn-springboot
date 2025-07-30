@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -31,8 +32,8 @@ public class BlogApiController {
     // ResponseEntity: 스프링이 제공하는 HTTP Response 응답 전체를 표현하는 클래스
     // <Article>: 내가 처리할 리스폰의 바디가 Article 타입이라는 의미
     // @RequestBody AddArticleRequest request: HTTP 요청의 바디에 있는 제이슨을 지정한 타입(AddArticleRequest)의 자바 객체로 변환
-    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
-        Article savedArticle = blogService.save(request);
+    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request, Principal principal) {
+        Article savedArticle = blogService.save(request, principal.getName());
 
         // ResponseEntity.status(HttpStatus.CREATED): 상태 코드를 201(CREATED)로 설정
         // .body(savedArticle): 요청에 대한 답변의 바디에 새로 생성한 객체를 넣어서 보내줌

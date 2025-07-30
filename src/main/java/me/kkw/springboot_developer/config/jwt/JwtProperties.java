@@ -4,6 +4,7 @@ package me.kkw.springboot_developer.config.jwt;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /*
 * 목적
@@ -27,6 +28,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 * jwt.secret_key는 JwtProperties의 secretKey 필드에 주입된다.
 */
 @ConfigurationProperties("jwt")
+@Component
 public class JwtProperties {
 
     private String issuer;

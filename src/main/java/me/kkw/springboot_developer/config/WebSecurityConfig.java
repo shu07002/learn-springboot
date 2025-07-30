@@ -42,7 +42,7 @@ public class WebSecurityConfig {
     * 이런 파일들은 굳이 로그인 여부랑 관계가 없으니까 무시
     */
     @Bean
-    public WebSecurityCustomizer configure() {
+    public WebSecurityCustomizer webSecurityCustomizer() {
         return (web -> web.ignoring()
                 .requestMatchers(PathRequest.toH2Console())
                 .requestMatchers("/static/**"));
@@ -75,7 +75,7 @@ public class WebSecurityConfig {
     * .invalidateHttpSession(true): 로그아웃 시, 사용자의 모든 세션 정보를 삭제
     *
     * .csrf(AbstractHttpConfigurer::disable): 웹 공격 막는 기능인데 일단 비활성화
-    * 
+    *
     * .build(): 설정한 규칙들 종합해서 하나의 SecurityFilterChain 객체로 반환
     *
     * =========================================================================
